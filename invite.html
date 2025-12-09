@@ -40,7 +40,7 @@
     /* 상단 사진 */
     .photo-box { text-align:center; margin-top:10px; }
     .photo-box img {
-      width:285px;
+      width:271px;
       border-radius:18px;
       box-shadow:0 8px 20px rgba(0,0,0,.15);
     }
@@ -82,6 +82,7 @@
 
     /* INVITATION */
     .content_03{
+      margin: 0 auto;
       margin-top:20px;
       background:#fff;
       padding-bottom:10px;
@@ -119,11 +120,13 @@
 
     /* LOCATION */
     .content_45{
+      margin: 0 auto;
       background:#fff; margin-top:20px;
       border-radius:18px; border:1px solid #e5d6c8;
       box-shadow:0 6px 18px rgba(0,0,0,.06);
       width: 320px;
       box-sizing: border-box;
+      text-align:center;
     }
     .content_04_title{
       padding-top:20px;
@@ -214,7 +217,7 @@
     
     /* 사진만 보이는 슬라이더 박스 */
     .slider {
-      width: 285px;
+      width: 271px;
       height: 380px;
       overflow: hidden;
       border-radius: 18px;
@@ -229,7 +232,7 @@
     
     /* 개별 사진 */
     .slides img {
-      width: 285px;
+      width: 271px;
       height: 380px;
       object-fit: cover;
       object-position: center top;
@@ -256,7 +259,7 @@
     /* 동그라미 네비게이션 */
     .dots {
       margin: 10px auto 0;
-      width: 285px;        /* 사진과 동일한 폭 */
+      width: 271px;        /* 사진과 동일한 폭 */
       text-align: center;
       display: block;      /* 혹시 flex 영향 방지 */
     }
@@ -373,7 +376,7 @@
   // 슬라이드 이동
   function goTo(i) {
     currentIndex = i;
-    slides.style.transform = `translateX(-${285 * currentIndex}px)`;
+    slides.style.transform = `translateX(-${271 * currentIndex}px)`;
     updateDots();
   }
   
@@ -447,6 +450,7 @@
 
 </body>
 </html>
+
 
 
 
