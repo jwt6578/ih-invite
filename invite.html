@@ -189,20 +189,27 @@
       padding:10px 0;
       border-radius:6px;
     }
-    .slider {
-      width: 308px;
-      height: 308px;
-      margin: 10px auto;
+    /* 전체 슬라이더 묶음 */
+    .slider-wrap {
+      width: 320px;
+      margin: 20px auto 0;
       position: relative;
-      overflow: hidden;
+      text-align: center;
+    }
+    
+    /* 슬라이더 영역 */
+    .slider {
+      width: 308px;  /* 사진 크기 유지 */
+      height: 308px;
+      margin: 0 auto;
+      overflow: hidden; /* 다음 사진 안 보이게 */
       border-radius: 18px;
       box-shadow: 0 8px 20px rgba(0,0,0,.15);
     }
     
+    /* 실제 슬라이드 컨테이너 */
     .slides {
       display: flex;
-      width: 100%;
-      height: 100%;
       transition: transform 0.4s ease;
     }
     
@@ -210,43 +217,43 @@
       width: 308px;
       height: 308px;
       object-fit: cover;
-      user-select: none;
       pointer-events: none;
+      user-select: none;
     }
     
+    /* 좌우 버튼 — 사진 바깥에 위치 */
     .slide-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.7);
+      background: none;
       border: none;
-      padding: 6px 12px;
-      font-size: 24px;
+      font-size: 28px;
       cursor: pointer;
-      border-radius: 8px;
-      z-index: 10;
+      color: #9F897B;
+      font-weight: bold;
     }
-    .prev { left: 10px; }
-    .next { right: 10px; }
     
+    .prev { left: -5px; }   /* 사진 바깥쪽 */
+    .next { right: -5px; }  /* 사진 바깥쪽 */
+    
+    /* 네비게이션 점 */
     .dots {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
+      margin-top: 10px;
     }
+    
     .dots span {
-      display: inline-block;
       width: 8px;
       height: 8px;
-      margin: 0 4px;
-      background: #ffffff80;
+      display: inline-block;
+      background: #c5b5a8;
       border-radius: 50%;
-      cursor: pointer;
+      margin: 0 4px;
       transition: 0.3s;
     }
+    
     .dots .active {
-      background: #fff;
+      background: #9F897B;
       width: 10px;
       height: 10px;
     }
@@ -254,18 +261,20 @@
 </head>
 <body>
 
-<div id="wrap">
-
-  <!-- 대표 사진 (invite.jpg) -->
-  <div class="slider">
-    <div class="slides">
-      <img src="./invite1.jpg">
-      <img src="./invite2.jpg">
-      <img src="./invite3.jpg">
-    </div>
-
+<!-- 🔥 슬라이더 영역 -->
+  <div class="slider-wrap">
     <button class="slide-btn prev">❮</button>
+  
+    <div class="slider">
+      <div class="slides">
+        <img src="./invite1.jpg">
+        <img src="./invite2.jpg">
+        <img src="./invite3.jpg">
+      </div>
+    </div>
+  
     <button class="slide-btn next">❯</button>
+  
     <div class="dots"></div>
   </div>
 
@@ -332,57 +341,64 @@
   const images = document.querySelectorAll('.slides img');
   const totalSlides = images.length;
   const dotsContainer = document.querySelector('.dots');
-  let autoSlide;
+  let autoTimer;
   
-  // 네비 생성
+  // 네비 점 생성
   images.forEach((_, idx) => {
     const dot = document.createElement('span');
     if (idx === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => changeSlide(idx));
+    dot.addEventListener('click', () => goTo(idx));
     dotsContainer.appendChild(dot);
   });
   const dots = document.querySelectorAll('.dots span');
   
-  // 이동 함수
-  function changeSlide(i) {
+  // 슬라이드 이동
+  function goTo(i) {
     currentIndex = i;
     slides.style.transform = `translateX(-${308 * currentIndex}px)`;
+    updateDots();
+  }
+  
+  // 다음 / 이전
+  function next() { goTo((currentIndex + 1) % totalSlides); }
+  function prev() { goTo((currentIndex - 1 + totalSlides) % totalSlides); }
+  
+  // 네비 업데이트
+  function updateDots() {
     dots.forEach(dot => dot.classList.remove('active'));
     dots[currentIndex].classList.add('active');
   }
   
   // 자동 슬라이드
   function startAuto() {
-    autoSlide = setInterval(() => {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      changeSlide(currentIndex);
-    }, 3000);
+    autoTimer = setInterval(next, 3500);
   }
-  function stopAuto() { clearInterval(autoSlide); }
+  function stopAuto() { clearInterval(autoTimer); }
   startAuto();
   
-  // 버튼
-  document.querySelector('.next').onclick = () => { stopAuto(); changeSlide((currentIndex + 1) % totalSlides); startAuto(); };
-  document.querySelector('.prev').onclick = () => { stopAuto(); changeSlide((currentIndex - 1 + totalSlides) % totalSlides); startAuto(); };
+  // 버튼 이벤트
+  document.querySelector('.next').onclick = () => { stopAuto(); next(); startAuto(); };
+  document.querySelector('.prev').onclick = () => { stopAuto(); prev(); startAuto(); };
   
   // 터치 스와이프
   let startX = 0;
-  slides.addEventListener('touchstart', e => { startX = e.touches[0].clientX; stopAuto(); });
+  slides.addEventListener('touchstart', e => {
+    stopAuto();
+    startX = e.touches[0].clientX;
+  });
   slides.addEventListener('touchend', e => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) changeSlide((currentIndex + 1) % totalSlides);
-    else if (endX - startX > 50) changeSlide((currentIndex - 1 + totalSlides) % totalSlides);
+    const endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) next();
+    else if (endX - startX > 50) prev();
     startAuto();
   });
-  // ✅ 1) 카카오맵
-  kakao.maps.load(function() {
-    const container = document.getElementById("kakao-map");
-    const center = new kakao.maps.LatLng(35.1741, 129.1265);
-    const map = new kakao.maps.Map(container, { center, level: 4 });
-    const marker = new kakao.maps.Marker({ position: center });
-    marker.setMap(map);
+// ✅ 1) 카카오맵 
+  kakao.maps.load(function() { const container = document.getElementById("kakao-map"); 
+    const center = new kakao.maps.LatLng(35.1741, 129.1265); 
+    const map = new kakao.maps.Map(container, { center, level: 4 }); 
+    const marker = new kakao.maps.Marker({ position: center }); 
+    marker.setMap(map); 
   });
-
   // ✅ 2) 카카오톡 공유 버튼 (createDefaultButton 사용)
   Kakao.init('986bf149825eb167d92a31456ee4962a');  // 네 JS키
 
@@ -413,6 +429,7 @@
 
 </body>
 </html>
+
 
 
 
