@@ -171,7 +171,15 @@
       border-radius:999px;
       background:#f9fafb;
     }
-
+    .parent-label {
+      font-size: 11px;     /* 아빠·엄마 */
+      opacity: 0.9;
+    }
+    
+    .parent-name {
+      font-size: 14px;     /* 장원태·박선영 강조 */
+      font-weight: 600;
+    }
     .footer{
       text-align:center;
       background:#000;
@@ -254,14 +262,14 @@
   });
 
   // ✅ 2) 카카오톡 공유 버튼
-  Kakao.init('986bf149825eb167d92a31456ee4962a'); // 👉 반드시 JavaScript 키
+  Kakao.init('986bf149825eb167d92a31456ee4962a');  // 👉 본인 'JavaScript 키'
 
   function sendLink() {
     Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
-        title: '장이현 돌잔치 초대장',
-        description: '25년 12월 13일(토) 오후 5시 | 더파티 센텀점 B1 ROOM 10',
+        title: '장이현 돌잔치초대장 입니다.',
+        description: '2025년 12월 13일(토) 오후 5시 | 더파티 센텀점 B1 ROOM 10',
         imageUrl: 'https://jwt6578.github.io/ih-invite/og-image.jpg',
         link: {
           mobileWebUrl: 'https://jwt6578.github.io/ih-invite/',
@@ -270,7 +278,7 @@
       },
       buttons: [
         {
-          title: '초대장 보러가기',   // 👉 카카오톡 안에서 보이는 버튼 글자
+          title: '초대장 보러가기',   // 👉 카톡 메시지 안에 나오는 버튼 글자
           link: {
             mobileWebUrl: 'https://jwt6578.github.io/ih-invite/',
             webUrl: 'https://jwt6578.github.io/ih-invite/'
@@ -283,6 +291,7 @@
 
 </body>
 </html>
+
 
 
 
