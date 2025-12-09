@@ -262,34 +262,36 @@
   });
 
   // ✅ 2) 카카오톡 공유 버튼 (createDefaultButton 사용)
-  Kakao.init('986bf149825eb167d92a31456ee4962a'); // 네 JavaScript 키
+  Kakao.init('986bf149825eb167d92a31456ee4962a');  // 네 JS키
 
-  Kakao.Share.createDefaultButton({
-    container: 'kakao-link-btn',   // 👉 이 id 가진 버튼에 기능 붙임
-    objectType: 'feed',
-    content: {
-      title: '장이현 돌잔치 초대장',
-      description: '2025년 12월 13일 토요일 오후 5시 | 더파티 센텀점 B1 ROOM 10',
-      imageUrl: 'https://jwt6578.github.io/ih-invite/og-image.jpg',
-      link: {
-        mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
-        webUrl: 'https://jwt6578.github.io/ih-invite/invite.html'
-      },
-    },
-     buttons: [
-      {
-        title: '초대장 보러가기',   // 👉 카톡 카드 하단 버튼 글자
+  document.getElementById("kakao-link-btn").addEventListener("click", function() {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '장이현 돌잔치 초대장',
+        description: '2025년 12월 13일 토요일 오후 5시 | 더파티 센텀점 B1 ROOM 10',
+        imageUrl: 'https://jwt6578.github.io/ih-invite/og-image.jpg',
         link: {
           mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
-          webUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
-        },
+          webUrl: 'https://jwt6578.github.io/ih-invite/invite.html'
+        }
       },
-    ],
+      buttons: [
+        {
+          title: '초대장 보러가기',
+          link: {
+            mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
+            webUrl: 'https://jwt6578.github.io/ih-invite/invite.html'
+          }
+        }
+      ]
+    });
   });
 </script>
 
 </body>
 </html>
+
 
 
 
