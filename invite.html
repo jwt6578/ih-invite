@@ -191,14 +191,14 @@
     }
     /* 전체 페이지 레이아웃이 슬라이더 때문에 밀리지 않도록 고정 */
     #wrap {
-      width: 320px;
+      width: 285px;
       margin: 0 auto;
       overflow-x: hidden;   /* 슬라이더의 가로 확장 방지 */
     }
     
     /* 슬라이더 내부만 가로 스크롤 허용 (부모에게 영향 X) */
     .slider-wrap {
-      width: 320px;         /* 전체 페이지 폭과 일치 */
+      width: 285px;         /* 전체 페이지 폭과 일치 */
       margin: 20px auto 0;
       position: relative;
     }
@@ -240,12 +240,13 @@
     }
     
     /* 사진 바깥쪽 정확한 위치 */
-    .prev { left: 5px; }    /* 왼쪽 바깥 */
-    .next { right: 5px; }   /* 오른쪽 바깥 */
+    .prev { left: 15px; }    /* 왼쪽 바깥 */
+    .next { right: 15px; }   /* 오른쪽 바깥 */
     
     /* 동그라미 네비게이션 */
     .dots {
       margin-top: 10px;
+      object-position: center;
     }
     
     .dots span {
@@ -435,6 +436,7 @@
 
 </body>
 </html>
+
 
 
 
