@@ -89,6 +89,9 @@
       border:1px solid #e5d6c8;
       box-shadow:0 6px 18px rgba(0,0,0,.06);
       text-align:center;
+      width: 320px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
     .content_03_title{
       padding-top:18px;
@@ -120,6 +123,9 @@
       background:#fff; margin-top:20px;
       border-radius:18px; border:1px solid #e5d6c8;
       box-shadow:0 6px 18px rgba(0,0,0,.06);
+      width: 320px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
     .content_04_title{
       padding-top:20px;
@@ -188,6 +194,9 @@
       margin-top:20px;
       padding:10px 0;
       border-radius:6px;
+      width: 320px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
     /* 전체 페이지 레이아웃이 슬라이더 때문에 밀리지 않도록 고정 */
     #wrap {
@@ -244,8 +253,8 @@
     }
     
     /* 정확히 사진 바깥쪽 */
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .prev { left: 5px; }
+    .next { right: 5px; }
     
     /* 동그라미 네비게이션 */
     .dots {
@@ -367,7 +376,7 @@
   // 슬라이드 이동
   function goTo(i) {
     currentIndex = i;
-    slides.style.transform = `translateX(-${285 * currentIndex}px)`;
+    slides.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
     updateDots();
   }
   
@@ -441,6 +450,7 @@
 
 </body>
 </html>
+
 
 
 
