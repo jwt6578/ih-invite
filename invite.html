@@ -191,23 +191,23 @@
     }
     /* 전체 슬라이더 묶음 */
     .slider-wrap {
-      width: 320px;
+      width: 360px;   /* 사진(308) + 양쪽 버튼 공간 확보 */
       margin: 20px auto 0;
       position: relative;
       text-align: center;
     }
     
-    /* 슬라이더 영역 */
+    /* 사진 슬라이더 영역 */
     .slider {
-      width: 308px;  /* 사진 크기 유지 */
-      height: 308px;
+      width: 308px;
+      height: 380px;
       margin: 0 auto;
-      overflow: hidden; /* 다음 사진 안 보이게 */
+      overflow: hidden;
       border-radius: 18px;
       box-shadow: 0 8px 20px rgba(0,0,0,.15);
     }
     
-    /* 실제 슬라이드 컨테이너 */
+    /* 슬라이드 내부 */
     .slides {
       display: flex;
       transition: transform 0.4s ease;
@@ -215,36 +215,36 @@
     
     .slides img {
       width: 308px;
-      height: 308px;
+      height: 380px;
       object-fit: cover;
-      pointer-events: none;
-      user-select: none;
+      object-position: center top;
     }
     
-    /* 좌우 버튼 — 사진 바깥에 위치 */
+    /* 좌우 버튼 — 사진 바깥으로 이동 */
     .slide-btn {
       position: absolute;
-      top: 50%;
+      top: 190px;          /* 사진 높이(380px)의 중간 */
       transform: translateY(-50%);
       background: none;
       border: none;
-      font-size: 28px;
+      font-size: 32px;
       cursor: pointer;
       color: #9F897B;
       font-weight: bold;
     }
     
-    .prev { left: -5px; }   /* 사진 바깥쪽 */
-    .next { right: -5px; }  /* 사진 바깥쪽 */
+    /* 사진 바깥쪽 정확한 위치 */
+    .prev { left: 5px; }    /* 왼쪽 바깥 */
+    .next { right: 5px; }   /* 오른쪽 바깥 */
     
-    /* 네비게이션 점 */
+    /* 동그라미 네비게이션 */
     .dots {
       margin-top: 10px;
     }
     
     .dots span {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       display: inline-block;
       background: #c5b5a8;
       border-radius: 50%;
@@ -254,8 +254,8 @@
     
     .dots .active {
       background: #9F897B;
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
     }
   </style>
 </head>
@@ -429,6 +429,7 @@
 
 </body>
 </html>
+
 
 
 
