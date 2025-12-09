@@ -217,6 +217,7 @@
     
     /* 사진만 보이는 슬라이더 박스 */
     .slider {
+      margin: 0 auto;
       width: 271px;
       height: 380px;
       overflow: hidden;
@@ -232,12 +233,12 @@
     
     /* 개별 사진 */
     .slides img {
-      width: 271px;
-      height: 380px;
-      object-fit: cover;
-      object-position: center top;
+      flex: 0 0 100%;      /* 사진 1장 폭 = slider 폭(271px) */
+      width: 100%;         /* 자동으로 271px 맞춤 */
+      height: 100%;        /* 자동으로 프레임 높이 맞춤 */
+      object-fit: cover;   /* 비율 상관 없이 프레임 딱 맞게 */
+      object-position: center center;
     }
-    
     /* 좌우 버튼 — 사진 바깥 */
     .slide-btn {
       position: absolute;
@@ -450,6 +451,7 @@
 
 </body>
 </html>
+
 
 
 
