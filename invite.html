@@ -22,7 +22,7 @@
   <!-- 카카오맵 SDK -->
   <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=986bf149825eb167d92a31456ee4962a&autoload=false"></script>
   <!-- 카카오 링크 SDK -->
-  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.7/kakao.min.js"></script>
 
   <style>
     * { box-sizing:border-box; -webkit-text-size-adjust:none; }
@@ -265,24 +265,17 @@
   Kakao.init('986bf149825eb167d92a31456ee4962a'); // 네 JavaScript 키
 
   Kakao.Share.createDefaultButton({
-    container: '#kakao-link-btn',   // 👉 이 id 가진 버튼에 기능 붙임
+    container: 'kakao-link-btn',   // 👉 이 id 가진 버튼에 기능 붙임
     objectType: 'feed',
     content: {
       title: '장이현 돌잔치 초대장',
       description: '2025년 12월 13일 토요일 오후 5시 | 더파티 센텀점 B1 ROOM 10',
       imageUrl: 'https://jwt6578.github.io/ih-invite/og-image.jpg',
       link: {
-        // GitHub Pages 도메인과 정확히 일치해야 함
         mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
         webUrl: 'https://jwt6578.github.io/ih-invite/invite.html'
       },
     },
-    // social은 안 써도 되고, 써도 되고 (원하면 숫자 넣어줘도 됨)
-    // social: {
-    //   likeCount: 0,
-    //   commentCount: 0,
-    //   sharedCount: 0,
-    // },
     buttons: [
       {
         title: '초대장 보러가기',   // 👉 카톡 카드 하단 버튼 글자
@@ -297,6 +290,7 @@
 
 </body>
 </html>
+
 
 
 
