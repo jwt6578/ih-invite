@@ -255,40 +255,49 @@
   // ✅ 1) 카카오맵
   kakao.maps.load(function() {
     const container = document.getElementById("kakao-map");
-    const center = new kakao.maps.LatLng(35.16812, 129.13235); // 센텀 근처 좌표 (필요시 조정)
+    const center = new kakao.maps.LatLng(35.16812, 129.13235); // 센텀 근처 좌표
     const map = new kakao.maps.Map(container, { center, level: 4 });
     const marker = new kakao.maps.Marker({ position: center });
     marker.setMap(map);
   });
 
-  // ✅ 2) 카카오톡 공유 (Kakao.Share + buttonTitle 사용)
-  Kakao.init('986bf149825eb167d92a31456ee4962a'); // JavaScript 키
+  // ✅ 2) 카카오톡 공유 버튼 (createDefaultButton 사용)
+  Kakao.init('986bf149825eb167d92a31456ee4962a'); // 네 JavaScript 키
 
-  document.getElementById('kakao-link-btn').addEventListener('click', function() {
-    Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '장이현 돌잔치 초대장입니다.',
-        description: '2025.12.13(토) 오후 5시 | 더파티 센텀점 ROOM 10',
-        imageUrl: 'https://jwt6578.github.io/ih-invite/og-image.jpg',
+  Kakao.Share.createDefaultButton({
+    container: '#kakao-link-btn',   // 👉 이 id 가진 버튼에 기능 붙임
+    objectType: 'feed',
+    content: {
+      title: '장이현 돌잔치 초대장',
+      description: '2025년 12월 13일 토요일 오후 5시 | 더파티 센텀점 B1 ROOM 10',
+      imageUrl: 'https://jwt6578.github.io/ih-invite/og-image.jpg',
+      link: {
+        // GitHub Pages 도메인과 정확히 일치해야 함
+        mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
+        webUrl: 'https://jwt6578.github.io/ih-invite/invite.html'
+      },
+    },
+    // social은 안 써도 되고, 써도 되고 (원하면 숫자 넣어줘도 됨)
+    // social: {
+    //   likeCount: 0,
+    //   commentCount: 0,
+    //   sharedCount: 0,
+    // },
+    buttons: [
+      {
+        title: '초대장 보러가기',   // 👉 카톡 카드 하단 버튼 글자
         link: {
-          mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.htmlm',
+          mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
           webUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
         },
-      buttons: [
-        {
-          title: '초대장 보러 가기',
-          link: {
-            mobileWebUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
-            webUrl: 'https://jwt6578.github.io/ih-invite/invite.html',
-          },
-        },
-      ],
+      },
+    ],
   });
 </script>
 
 </body>
 </html>
+
 
 
 
