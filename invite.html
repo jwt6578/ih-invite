@@ -196,14 +196,16 @@
       overflow-x: hidden;   /* 슬라이더의 가로 확장 방지 */
     }
     
-    /* 슬라이더 내부만 가로 스크롤 허용 (부모에게 영향 X) */
+    /* 슬라이더 전체 묶음 */
     .slider-wrap {
-      width: 320px;         /* 전체 페이지 폭과 일치 */
-      margin: 0px auto 0;
+      width: 360px;        /* 사진(285px) + 버튼 여유 공간 확보 */
+      margin: 0 auto;
       position: relative;
+      overflow: visible;   /* 버튼 잘림 방지 */
+      text-align: center;
     }
-       
-    /* 사진 슬라이더 영역 */
+    
+    /* 사진만 보이는 슬라이더 박스 */
     .slider {
       width: 285px;
       height: 380px;
@@ -213,12 +215,13 @@
       box-shadow: 0 8px 20px rgba(0,0,0,.15);
     }
     
-    /* 슬라이드 내부 */
+    /* 슬라이드 묶음 */
     .slides {
       display: flex;
-      transition: transform 0.8s ease;
+      transition: transform 0.5s ease;
     }
     
+    /* 개별 사진 */
     .slides img {
       width: 285px;
       height: 380px;
@@ -226,38 +229,37 @@
       object-position: center top;
     }
     
-    /* 좌우 버튼 — 사진 바깥으로 이동 */
+    /* 좌우 버튼 — 사진 바깥 */
     .slide-btn {
       position: absolute;
-      top: 190px;          /* 사진 높이(380px)의 중간 */
+      top: 190px;               /* 세로 중앙 */
       transform: translateY(-50%);
       background: none;
       border: none;
-      font-size: 32px;
+      font-size: 34px;
       cursor: pointer;
       color: #9F897B;
       font-weight: bold;
+      z-index: 20;              /* 절대 사라지지 않도록 */
     }
     
-    /* 사진 바깥쪽 정확한 위치 */
-    .prev { left: 10px; }    /* 왼쪽 바깥 */
-    .next { right: 10px; }   /* 오른쪽 바깥 */
+    /* 정확히 사진 바깥쪽 */
+    .prev { left: 15px; }
+    .next { right: 15px; }
     
     /* 동그라미 네비게이션 */
     .dots {
-      margin-top: 10px;
-      text-align: center;   /* 가운데 정렬 */
-      width: 100%;          /* 혹시 부모가 flex면 대비 */
+      text-align: center;
+      margin-top: 14px;
     }
     
     .dots span {
       width: 9px;
       height: 9px;
-      display: inline-block;
       background: #c5b5a8;
       border-radius: 50%;
+      display: inline-block;
       margin: 0 4px;
-      transition: 0.3s;
     }
     
     .dots .active {
@@ -437,6 +439,7 @@
 
 </body>
 </html>
+
 
 
 
