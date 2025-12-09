@@ -35,7 +35,7 @@
       font-size:15px;
       line-height:25px;
     }
-    #wrap { width:320px; margin:0 auto; }
+    #wrap { width:360px; margin:0 auto; }
 
     /* 상단 사진 */
     .photo-box { text-align:center; margin-top:10px; }
@@ -191,15 +191,15 @@
     }
     /* 전체 페이지 레이아웃이 슬라이더 때문에 밀리지 않도록 고정 */
     #wrap {
-      width: 285px;
+      width: 320px;
       margin: 0 auto;
       overflow-x: hidden;   /* 슬라이더의 가로 확장 방지 */
     }
     
     /* 슬라이더 내부만 가로 스크롤 허용 (부모에게 영향 X) */
     .slider-wrap {
-      width: 285px;         /* 전체 페이지 폭과 일치 */
-      margin: 20px auto 0;
+      width: 320px;         /* 전체 페이지 폭과 일치 */
+      margin: 0px auto 0;
       position: relative;
     }
        
@@ -216,7 +216,7 @@
     /* 슬라이드 내부 */
     .slides {
       display: flex;
-      transition: transform 0.4s ease;
+      transition: transform 0.8s ease;
     }
     
     .slides img {
@@ -240,13 +240,14 @@
     }
     
     /* 사진 바깥쪽 정확한 위치 */
-    .prev { left: 15px; }    /* 왼쪽 바깥 */
-    .next { right: 15px; }   /* 오른쪽 바깥 */
+    .prev { left: 10px; }    /* 왼쪽 바깥 */
+    .next { right: 10px; }   /* 오른쪽 바깥 */
     
     /* 동그라미 네비게이션 */
     .dots {
       margin-top: 10px;
-      object-position: center;
+      text-align: center;   /* 가운데 정렬 */
+      width: 100%;          /* 혹시 부모가 flex면 대비 */
     }
     
     .dots span {
@@ -436,6 +437,7 @@
 
 </body>
 </html>
+
 
 
 
