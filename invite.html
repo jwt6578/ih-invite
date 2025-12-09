@@ -2,58 +2,276 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>장이현 돌잔치 초대장</title>
+  <title>장이현 돌잔치 모바일 초대장</title>
 
-  <!-- 🔥 카카오/카톡/디버거용 OG 메타 -->
+  <!-- 🔥 카카오톡 썸네일용 OG 태그 -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="장이현의 돌잔치 초대장" />
+  <meta property="og:title" content="장이현의 첫번째 생일" />
   <meta property="og:description" content="2025.12.13 토요일 오후 5시 | 더파티 센텀점 B1 ROOM 10" />
-
-  <!-- 🔻 여기를 '네 GitHub 주소'로 바꿔야 함 -->
-  <!-- 예: https://YOURNAME.github.io/ihyeon-invite/og-image.jpg -->
   <meta property="og:image" content="https://jwt6578.github.io/ih-invite/og-image.jpg" />
   <meta property="og:url" content="https://jwt6578.github.io/ih-invite/invite.html" />
 
-  <!-- 🔻 여기서 NAS 초대장 주소로 리다이렉트됨 -->
-  <meta http-equiv="refresh" content="1; url=http://zoehom.dscloud.me:1224/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Noto+Serif:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+
+  <!-- 카카오맵 SDK -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=986bf149825eb167d92a31456ee4962a&autoload=false"></script>
+  <!-- 카카오 링크 SDK -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
   <style>
-    body {
-      margin:0;
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,
-                   "Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-      background:#fff5ea;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
+    * { box-sizing:border-box; -webkit-text-size-adjust:none; }
+    html, body {
+      margin:0; padding:0;
+      background:#FFF5EA;
+      font-family:"Noto Serif", serif;
+      font-weight:600;
+      color:#2a2a2a;
+      font-size:15px;
+      line-height:25px;
     }
-    .box{
+    #wrap { width:320px; margin:0 auto; }
+
+    /* 상단 사진 */
+    .photo-box { text-align:center; margin-top:10px; }
+    .photo-box img {
+      width:308px;
+      border-radius:18px;
+      box-shadow:0 8px 20px rgba(0,0,0,.15);
+    }
+
+    /* 타이틀 */
+    .title01 { text-align:center; padding-top:24px; }
+    .title01 span {
+      font-family:"Domine", serif;
+      font-size:13px;
+      color:#9F897B;
+      letter-spacing:0.1em;
+    }
+    .bname {
+      margin-top:12px;
+      font-size:20px;
+      letter-spacing:0.4em;
+      color:#414042;
+    }
+
+    .content_01{
+      margin-top:24px;
       text-align:center;
-      padding:20px;
+      color:#9F897B;
+      font-size:14px;
+      line-height:26px;
     }
-    a{
-      color:#2563eb;
-      text-decoration:none;
+
+    .content_02{
+      margin:20px auto 0;
+      background:#9F897B;
+      color:#FFF5EA;
+      width:240px;
+      padding:12px 16px;
+      text-align:center;
+      font-size:14px;
+      letter-spacing:0.1em;
+      border-radius:999px;
+    }
+
+    /* INVITATION */
+    .content_03{
+      margin-top:20px;
+      background:#fff;
+      padding-bottom:10px;
+      border-radius:18px;
+      border:1px solid #e5d6c8;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+      text-align:center;
+    }
+    .content_03_title{
+      padding-top:18px;
+      font-family:"Domine", serif;
+      color:#9F897B;
+      letter-spacing:0.1em;
+      font-size:15px;
+    }
+    .content_03_memo{
+      padding:10px 18px 18px;
+      font-size:13px;
+    }
+    .content_03_pname{
+      padding-bottom:15px;
+      font-size:13px;
+    }
+    #kakao-link-btn{
+      background:#FEE500;
+      border-radius:999px;
+      padding:10px 16px;
+      font-size:12px;
+      border:none;
+      cursor:pointer;
+      margin-bottom:14px;
+    }
+
+    /* LOCATION */
+    .content_45{
+      background:#fff; margin-top:20px;
+      border-radius:18px; border:1px solid #e5d6c8;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+    }
+    .content_04_title{
+      padding-top:20px;
+      font-family:"Domine", serif;
+      color:#9F897B;
+      letter-spacing:0.1em;
+      text-align:center;
+      font-size:15px;
+    }
+    #kakao-map{
+      width:270px; height:260px; margin:12px auto;
+      border-radius:12px; border:1px solid #ddd;
+    }
+    .content_04_way{
+      padding:14px 20px 20px;
+      text-align:center;
+      font-size:13px;
+    }
+
+    /* CONTACT */
+    .contact{
+      background:#fff; margin-top:20px;
+      padding-bottom:14px;
+      border-radius:18px;
+      text-align:center;
+      border:1px solid #e5d6c8;
+      box-shadow:0 6px 18px rgba(0,0,0,.06);
+    }
+    .contact-title{
+      padding-top:16px;
+      font-family:"Domine", serif;
+      color:#9F897B;
+      letter-spacing:0.1em;
+      font-size:15px;
+    }
+    .contact-table{
+      display:flex;
+      justify-content:space-around;
+      margin-top:12px;
+      font-size:12px;
+    }
+    .contact-card{text-align:center;}
+    .btn{
+      display:inline-block;
+      margin-top:6px;
+      padding:6px 12px;
+      font-size:11px;
+      border:1px solid #ddd;
+      border-radius:999px;
+      background:#f9fafb;
+    }
+
+    .footer{
+      text-align:center;
+      background:#000;
+      color:#fff;
+      font-size:10px;
+      margin-top:20px;
+      padding:10px 0;
+      border-radius:6px;
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <p>장이현 돌잔치 초대장으로 이동 중입니다...</p>
-    <p><a href="http://zoehom.dscloud.me:1224/">바로 이동하기</a></p>
+
+<div id="wrap">
+
+  <!-- 대표 사진 (invite.jpg) -->
+  <div class="photo-box">
+    <img src="/invite.jpg" alt="메인사진">
   </div>
 
-  <script>
-    // 혹시 모를 상황 대비 JS로 한 번 더 이동
-    setTimeout(function(){
-      location.href = "http://zoehom.dscloud.me:1224/";
-    }, 500);
-  </script>
+  <div class="title01">
+    <span>FIRST BIRTHDAY</span><br/>
+    <div class="bname">장이현의 첫번째 생일</div>
+  </div>
+
+  <div class="content_01">
+    2025.12.13. 토  오후 5시00분<br/>
+    더파티 센텀점 B1 ROOM 10
+  </div>
+
+<div class="content_02">
+  <span class="parent-label">아빠</span>
+  <span class="parent-name">장원태</span>
+  &nbsp;•&nbsp;
+  <span class="parent-label">엄마</span>
+  <span class="parent-name">박선영</span>
+</div>
+
+
+  <!-- INVITATION -->
+  <div class="content_03">
+    <div class="content_03_title">INVITATION</div>
+    <div class="content_03_memo">
+      사랑과 축복 속에 무럭무럭 자란 이현이가 <br/> 첫 돌을 맞이했습니다.<br/>
+      바쁘시더라도 참석하시어 따뜻한 축하를 <br/> 보내주시면 감사하겠습니다.
+    </div>
+    <div class="content_03_pname">아빠 장원태 · 엄마 박선영 드림</div>
+
+    <button id="kakao-link-btn">카카오톡으로 초대장 공유하기</button>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="content_45">
+    <div class="content_04_title">LOCATION</div>
+
+    <div id="kakao-map"></div>
+
+    <div class="content_04_way">
+      부산 해운대구 우동 1463-1<br/>
+      센텀 사이언스파크 지하 1층 더파티 센텀점<br/><br/>
+      2호선 센텀시티역 4번출구<br/>
+      (마을버스 3-1, 3-2 운행)<br/>
+      버스: 115, 181, 307 <br/> (SK텔레콤 정류소 하차 도보 3분)<br/><br/>
+      3시간 무료 주차 가능
+    </div>
+  </div>
+
+  <div class="footer">COPYRIGHT (C) 장이현 ALL RIGHTS RESERVED</div>
+
+</div>
+
+<script>
+  // ✅ 1) 카카오맵
+  kakao.maps.load(function() {
+    const container = document.getElementById("kakao-map");
+    const center = new kakao.maps.LatLng(35.16812, 129.13235); // 센텀 근처 좌표 (필요시 조정)
+    const map = new kakao.maps.Map(container, { center, level: 4 });
+    const marker = new kakao.maps.Marker({ position: center });
+    marker.setMap(map);
+  });
+
+  // ✅ 2) 카카오톡 공유 버튼
+  Kakao.init("986bf149825eb167d92a31456ee4962a"); // 카카오 JavaScript 키
+
+  document.getElementById("kakao-link-btn").addEventListener("click", function(){
+    Kakao.Link.sendDefault({
+      objectType:"feed",
+      content:{
+        title:"장이현 돌잔치 초대장",
+        description:"2025년 12월 13일 토요일 오후 5시 | 더파티 센텀점 B1 ROOM 10",
+        imageUrl:"https://jwt6578.github.io/ih-invite/og-image.jpg",
+        link:{ mobileWebUrl:"https://jwt6578.github.io/ih-invite/invite.html", webUrl:"https://jwt6578.github.io/ih-invite/invite.html" }
+      },
+      buttons:[{
+        title:"초대장 보기",
+        link:{ mobileWebUrl:"https://jwt6578.github.io/ih-invite/invite.html", webUrl:"https://jwt6578.github.io/ih-invite/invite.html" }
+      }]
+    });
+  });
+</script>
+
 </body>
 </html>
-
-
-
