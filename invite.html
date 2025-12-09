@@ -189,6 +189,67 @@
       padding:10px 0;
       border-radius:6px;
     }
+    .slider {
+      width: 308px;
+      height: 308px;
+      margin: 10px auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s ease;
+    }
+    
+    .slides img {
+      width: 308px;
+      height: 308px;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+    }
+    
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.7);
+      border: none;
+      padding: 6px 12px;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 8px;
+      z-index: 10;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    
+    .dots {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+    }
+    .dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin: 0 4px;
+      background: #ffffff80;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .dots .active {
+      background: #fff;
+      width: 10px;
+      height: 10px;
+    }
   </style>
 </head>
 <body>
@@ -196,8 +257,16 @@
 <div id="wrap">
 
   <!-- 대표 사진 (invite.jpg) -->
-  <div class="photo-box">
-    <img src="./invite.jpg" alt="메인사진">
+  <div class="slider">
+    <div class="slides">
+      <img src="./invite1.jpg">
+      <img src="./invite2.jpg">
+      <img src="./invite3.jpg">
+    </div>
+
+    <button class="slide-btn prev">❮</button>
+    <button class="slide-btn next">❯</button>
+    <div class="dots"></div>
   </div>
 
   <div class="title01">
@@ -258,6 +327,53 @@
 </div>
 
 <script>
+  let currentIndex = 0;
+  const slides = document.querySelector('.slides');
+  const images = document.querySelectorAll('.slides img');
+  const totalSlides = images.length;
+  const dotsContainer = document.querySelector('.dots');
+  let autoSlide;
+  
+  // 네비 생성
+  images.forEach((_, idx) => {
+    const dot = document.createElement('span');
+    if (idx === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => changeSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dots span');
+  
+  // 이동 함수
+  function changeSlide(i) {
+    currentIndex = i;
+    slides.style.transform = `translateX(-${308 * currentIndex}px)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[currentIndex].classList.add('active');
+  }
+  
+  // 자동 슬라이드
+  function startAuto() {
+    autoSlide = setInterval(() => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      changeSlide(currentIndex);
+    }, 3000);
+  }
+  function stopAuto() { clearInterval(autoSlide); }
+  startAuto();
+  
+  // 버튼
+  document.querySelector('.next').onclick = () => { stopAuto(); changeSlide((currentIndex + 1) % totalSlides); startAuto(); };
+  document.querySelector('.prev').onclick = () => { stopAuto(); changeSlide((currentIndex - 1 + totalSlides) % totalSlides); startAuto(); };
+  
+  // 터치 스와이프
+  let startX = 0;
+  slides.addEventListener('touchstart', e => { startX = e.touches[0].clientX; stopAuto(); });
+  slides.addEventListener('touchend', e => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) changeSlide((currentIndex + 1) % totalSlides);
+    else if (endX - startX > 50) changeSlide((currentIndex - 1 + totalSlides) % totalSlides);
+    startAuto();
+  });
   // ✅ 1) 카카오맵
   kakao.maps.load(function() {
     const container = document.getElementById("kakao-map");
@@ -297,6 +413,7 @@
 
 </body>
 </html>
+
 
 
 
