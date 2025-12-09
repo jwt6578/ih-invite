@@ -189,14 +189,20 @@
       padding:10px 0;
       border-radius:6px;
     }
-    /* 전체 슬라이더 묶음 */
-    .slider-wrap {
-      width: 360px;   /* 사진(308) + 양쪽 버튼 공간 확보 */
-      margin: 20px auto 0;
-      position: relative;
-      text-align: center;
+    /* 전체 페이지 레이아웃이 슬라이더 때문에 밀리지 않도록 고정 */
+    #wrap {
+      width: 320px;
+      margin: 0 auto;
+      overflow-x: hidden;   /* 슬라이더의 가로 확장 방지 */
     }
     
+    /* 슬라이더 내부만 가로 스크롤 허용 (부모에게 영향 X) */
+    .slider-wrap {
+      width: 320px;         /* 전체 페이지 폭과 일치 */
+      margin: 20px auto 0;
+      position: relative;
+    }
+       
     /* 사진 슬라이더 영역 */
     .slider {
       width: 308px;
@@ -429,6 +435,7 @@
 
 </body>
 </html>
+
 
 
 
